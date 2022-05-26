@@ -15,7 +15,7 @@ export default function Card({ adviceData, isLoading, handleClick }) {
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
   return (
-    <div className="md:w-[36rem] md:shadow-2xl shadow-xl max-w-[36rem]  flex flex-col justify-between px-[1.625rem] relative bg-dark-grayish-blue rounded-[1rem] text-center">
+    <div className="md:w-[34rem] md:px-12 md:shadow-2xl shadow-xl max-w-[36rem]  flex flex-col justify-between px-[1.625rem] relative bg-dark-grayish-blue rounded-[1rem] text-center">
       <div className="pb-8 pt-10">
         <p className="uppercase text-xs font-extrabold tracking-[2.88px] text-neon-green pb-5">
           Advice #{adviceData.id || ''}
