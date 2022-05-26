@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import Card from './components/Card';
+const API_URL = 'https://api.adviceslip.com/advice';
 
 function App() {
+  const [advice, setAdvice] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(API_URL);
+        const { slip } = await res.json();
+        setAdvice(slip);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  async function handleClick() {
+    setIsLoading(true);
+    try {
+      const res = await fetch(API_URL);
+      const { slip } = await res.json();
+      setAdvice(slip);
+    } catch (err) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="px-4 min-h-screen grid place-items-center">
+      <Card
+        isLoading={isLoading}
+        handleClick={handleClick}
+        adviceData={advice}
+      />
     </div>
   );
 }
